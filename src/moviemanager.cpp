@@ -60,6 +60,7 @@
 #include <Nepomuk/Vocabulary/PIMO>
 #include <Nepomuk/Vocabulary/NCO>
 #include <Nepomuk/Vocabulary/NFO>
+#include <Nepomuk/Vocabulary/NMM>
 #include <Nepomuk/Query/AndTerm>
 #include <Nepomuk/Query/OrTerm>
 #include <Nepomuk/Vocabulary/NIE>
@@ -367,6 +368,11 @@ void MovieManager::slotSearchBarTextChanged(QString userInput)
 
 void MovieManager::getNepomukData()
 {
+    Nepomuk::Resource *test = new Nepomuk::Resource("/home/sandeep/Videos/Gracie.avi");
+    test->addType(Nepomuk::Vocabulary::NMM::Movie());
+    test->setRating(4);
+
+
     Nepomuk::Query::Term term =  Nepomuk::Query::ResourceTypeTerm( Nepomuk::Vocabulary::NFO::Video()) ||
                 Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(),
                                                Nepomuk::Query::LiteralTerm(QLatin1String("video")) );
@@ -374,7 +380,7 @@ void MovieManager::getNepomukData()
     Nepomuk::Query::Query m_currentQuery;
     m_currentQuery.setTerm(term);
     m_currentQuery.setLimit( 30 );
-
+    qDebug()<<m_currentQuery.toSparqlQuery();
     QList<Nepomuk::Query::Result> results = Nepomuk::Query::QueryServiceClient::syncQuery( m_currentQuery );
     //QList<Nepomuk::Resource> resources;
     Q_FOREACH( const Nepomuk::Query::Result& result,results) {
