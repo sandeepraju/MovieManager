@@ -1,0 +1,4 @@
+# Hashes of file build rules.
+0f76ff706b750c7c79f9d2c41b4eb84a CMakeFiles/moviemanager_automoc
+b494d2020d4cc8be3a030253a9543828 CMakeFiles/uninstall
+2ebeb2fa8907e6b2c6361c6045e704ce settings.h

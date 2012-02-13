@@ -1,0 +1,3 @@
+/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/CMakeFiles/moviemanager.dir
+/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/CMakeFiles/moviemanager_automoc.dir
+/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/CMakeFiles/uninstall.dir

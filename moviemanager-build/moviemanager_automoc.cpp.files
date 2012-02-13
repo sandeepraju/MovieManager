@@ -1,0 +1,14 @@
+SOURCES:
+/home/sandeep/SpecialTopic/moviemanager/src/moviemanager.cpp;/home/sandeep/SpecialTopic/moviemanager/src/main.cpp;/home/sandeep/SpecialTopic/moviemanager/src/imdb.cpp;/home/sandeep/SpecialTopic/moviemanager/src/qdownloader.cpp;/home/sandeep/SpecialTopic/moviemanager/src/moviemanagerlistitem.cpp
+MOC_COMPILE_DEFINITIONS:
+_BSD_SOURCE
+MOC_DEFINITIONS:
+ -D_BSD_SOURCE
+MOC_INCLUDES:
+
+CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE:
+ON
+CMAKE_BINARY_DIR:
+/home/sandeep/SpecialTopic/moviemanager/moviemanager-build
+CMAKE_SOURCE_DIR:
+/home/sandeep/SpecialTopic/moviemanager/src

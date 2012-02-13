@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+   <FileVersion major="1" minor="6" />
+   <Project>
+      <Option title="Project" />
+      <Option makefile_is_custom="1" />
+      <Option compiler="gcc" />
+      <Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\usr\share\;CMake Files\..\..\..\..\..\usr\share\cmake-2.8\;CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\;CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\Platform\;CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\Compiler\;CMake Files\..\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\..\usr\lib\automoc4\;CMake Files\..\..\..\kde\;CMake Files\..\..\..\kde\inst\;CMake Files\..\..\..\kde\inst\master\;CMake Files\..\..\..\kde\inst\master\share\;CMake Files\..\..\..\kde\inst\master\share\apps\;CMake Files\..\..\..\kde\inst\master\share\apps\cmake\;CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\;CMake Files\..\..\..\kde\inst\master\share\soprano\;CMake Files\..\..\..\kde\inst\master\share\soprano\cmake\;CMake Files\..\..\..\kde\inst\master\share\cmake\;CMake Files\..\..\..\kde\inst\master\share\cmake\SharedDesktopOntologies\;CMake Files\..\..\..\kde\inst\master\share\cmake\NepomukExtras\;" />
+      <Build>
+      <Target title="all">
+         <Option working_dir="/home/sandeep/SpecialTopic/moviemanager/moviemanager-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 all" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="install">
+         <Option working_dir="/home/sandeep/SpecialTopic/moviemanager/moviemanager-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 install" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="install/local">
+         <Option working_dir="/home/sandeep/SpecialTopic/moviemanager/moviemanager-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 install/local" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="install/strip">
+         <Option working_dir="/home/sandeep/SpecialTopic/moviemanager/moviemanager-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 install/strip" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="list_install_components">
+         <Option working_dir="/home/sandeep/SpecialTopic/moviemanager/moviemanager-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 list_install_components" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="moviemanager">
+         <Option output="/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/moviemanager" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 moviemanager" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="moviemanager/fast">
+         <Option output="/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/moviemanager" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 moviemanager/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="moviemanager_automoc">
+         <Option working_dir="/home/sandeep/SpecialTopic/moviemanager/moviemanager-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 moviemanager_automoc" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="rebuild_cache">
+         <Option working_dir="/home/sandeep/SpecialTopic/moviemanager/moviemanager-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 rebuild_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="test">
+         <Option working_dir="/home/sandeep/SpecialTopic/moviemanager/moviemanager-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 test" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="uninstall">
+         <Option working_dir="/home/sandeep/SpecialTopic/moviemanager/moviemanager-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 uninstall" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/sandeep/SpecialTopic/moviemanager/moviemanager-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      </Build>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/imdb.cpp">
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/main.cpp">
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/moviemanager.cpp">
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/moviemanagerlistitem.cpp">
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/qdownloader.cpp">
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/imdb.h">
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/moviemanager.h">
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/moviemanagerlistitem.h">
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/qdownloader.h">
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/settings.kcfgc">
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeUnixFindMake.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeDetermineSystem.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeSystem.cmake.in">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeDetermineCCompiler.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeDetermineCompilerId.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeFindBinUtils.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeCCompiler.cmake.in">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeDetermineCXXCompiler.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeDetermineCompilerId.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeFindBinUtils.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeCXXCompiler.cmake.in">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeSystemSpecificInformation.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeGenericSystem.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeFindCodeBlocks.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeCInformation.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeCommonLanguageInclude.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeTestCCompiler.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeTestCompilerCommon.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeDetermineCompilerABI.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeParseImplicitLinkInfo.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeCCompiler.cmake.in">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeCXXInformation.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeCommonLanguageInclude.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeTestCXXCompiler.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeTestCompilerCommon.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeDetermineCompilerABI.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeParseImplicitLinkInfo.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeCXXCompiler.cmake.in">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FindQJSON.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FindPkgConfig.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FindPackageHandleStandardArgs.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FindPackageMessage.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeParseArguments.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FindKDE4.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CheckSymbolExists.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/MacroAddFileDependencies.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeConfigurableFile.in">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeConfigurableFile.in">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeConfigurableFile.in">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeConfigurableFile.in">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CheckFunctionExists.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CheckLibraryExists.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CheckFunctionExists.c">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CheckFunctionExists.c">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CheckFunctionExists.c">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CheckFunctionExists.c">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CheckFunctionExists.c">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CheckFunctionExists.c">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FindThreads.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CheckIncludeFiles.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CheckLibraryExists.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeConfigurableFile.in">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CheckFunctionExists.c">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CheckFunctionExists.c">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FindPackageHandleStandardArgs.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FindPackageMessage.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeParseArguments.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeConfigurableFile.in">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FindPackageMessage.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FindPerl.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FindCygwin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FindPackageHandleStandardArgs.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FindPackageMessage.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeParseArguments.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/MacroAddFileDependencies.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FeatureSummary.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CMakeParseArguments.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CheckCXXCompilerFlag.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/CheckCXXSourceCompiles.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FindPackageMessage.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FindPackageMessage.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FindPackageMessage.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/FindPackageMessage.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/MacroAddFileDependencies.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/Platform/Linux.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\Platform\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/Platform/UnixPaths.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\Platform\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/Platform/Linux-GNU-C.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\Platform\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/Platform/Linux-GNU.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\Platform\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/Platform/Linux-GNU-CXX.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\Platform\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/Platform/Linux-GNU.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\Platform\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/Compiler/GNU-C.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\Compiler\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/Compiler/GNU.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\Compiler\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/Compiler/GNU-CXX.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\Compiler\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/share/cmake-2.8/Modules/Compiler/GNU.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\share\cmake-2.8\Modules\Compiler\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/lib/automoc4/Automoc4Config.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\lib\automoc4\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/lib/automoc4/Automoc4Version.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\lib\automoc4\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../../../usr/lib/automoc4/automoc4.files.in">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\lib\automoc4\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/FindKDE4Internal.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroEnsureVersion.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/FindQt4.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroPushRequiredVars.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/Qt4Macros.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/Qt4ConfigDependentSettings.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/FindX11.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/FindAutomoc4.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/FindPackageHandleStandardArgs.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/CMakeParseArguments.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroLibrary.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroOptionalFindPackage.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroOptionalAddSubdirectory.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroAdditionalCleanFiles.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroAddCompileFlags.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroAddLinkFlags.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroAppendIf.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroEnsureOutOfSourceBuild.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroBoolTo01.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroPushRequiredVars.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroLogFeature.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroWriteBasicCMakeVersionFile.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/CheckCXXSourceCompiles.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/HandleImportedTargetsInCMakeRequiredLibraries.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/KDELibsDependencies.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/KDEPlatformProfile.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/KDELibs4ToolsTargets.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/KDELibs4ToolsTargets-debugfull.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/KDELibs4LibraryTargets.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/KDELibs4LibraryTargets-debugfull.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/FindPhonon.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/FindPackageHandleStandardArgs.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/CMakeParseArguments.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/KDE4Macros.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/kde4_cmake_uninstall.cmake.in">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/FindNepomuk.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/FindSoprano.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/FindLibraryWithDebug.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/FindPackageHandleStandardArgs.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/CMakeParseArguments.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/FindSharedDesktopOntologies.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/FindPackageHandleStandardArgs.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/CMakeParseArguments.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/NepomukAddOntologyClasses.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/FindPackageHandleStandardArgs.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/CMakeParseArguments.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroLibrary.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroOptionalFindPackage.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroOptionalAddSubdirectory.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroAdditionalCleanFiles.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroAddCompileFlags.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroAddLinkFlags.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroAppendIf.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroEnsureOutOfSourceBuild.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroBoolTo01.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroPushRequiredVars.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroLogFeature.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/MacroWriteBasicCMakeVersionFile.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/apps/cmake/modules/KDE4Defaults.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\apps\cmake\modules\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/soprano/cmake/SopranoAddOntology.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\soprano\cmake\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/soprano/cmake/SopranoAddOntology.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\soprano\cmake\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/cmake/SharedDesktopOntologies/SharedDesktopOntologiesConfigVersion.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\cmake\SharedDesktopOntologies\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/cmake/SharedDesktopOntologies/SharedDesktopOntologiesConfig.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\cmake\SharedDesktopOntologies\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/cmake/NepomukExtras/NepomukExtrasConfigVersion.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\cmake\NepomukExtras\" />
+      </Unit>
+      <Unit filename="/home/sandeep/SpecialTopic/moviemanager/src/../../../kde/inst/master/share/cmake/NepomukExtras/NepomukExtrasConfig.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\kde\inst\master\share\cmake\NepomukExtras\" />
+      </Unit>
+   </Project>
+</CodeBlocks_project_file>
