@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by Qt Creator 2.4.0, 2012-02-13T14:53:24. -->
+<!-- Written by Qt Creator 2.4.0, 2012-02-08T14:53:21. -->
 <qtcreator>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -56,7 +56,7 @@
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
-    <value type="QString" key="CMakeProjectManager.CMakeBuildConfiguration.BuildDirectory">/home/sandeep/SpecialTopic/moviemanager-build</value>
+    <value type="QString" key="CMakeProjectManager.CMakeBuildConfiguration.BuildDirectory">/home/sandeep/SpecialTopic/moviemanager/moviemanager-build</value>
     <value type="QString" key="CMakeProjectManager.CMakeBuildConfiguration.ToolChain">ProjectExplorer.ToolChain.Gcc:/usr/bin/g++.x86-linux-generic-elf-32bit.gdb</value>
     <value type="QString" key="ProjectExplorer.BuildCOnfiguration.ToolChain">ProjectExplorer.ToolChain.Gcc:/usr/bin/g++.x86-linux-generic-elf-32bit.gdb</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
