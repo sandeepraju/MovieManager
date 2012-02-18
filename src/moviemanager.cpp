@@ -46,6 +46,9 @@
 #include <KRatingWidget>
 
 
+#include "nmm/movie.h"
+
+
 ////for testing/////
 ///pnh includes
 
@@ -371,6 +374,8 @@ void MovieManager::getNepomukData()
     Nepomuk::Resource *test = new Nepomuk::Resource("/home/sandeep/Videos/Gracie.avi");
     test->addType(Nepomuk::Vocabulary::NMM::Movie());
     test->setRating(4);
+
+    // Nepomuk::Vocabulary::NMM *tes = new Nepomuk::Vocabulary::NMM::Movie();
 
 
     Nepomuk::Query::Term term =  Nepomuk::Query::ResourceTypeTerm( Nepomuk::Vocabulary::NFO::Video()) ||
