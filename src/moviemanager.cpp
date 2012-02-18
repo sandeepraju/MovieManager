@@ -47,6 +47,7 @@
 
 
 #include "nmm/movie.h"
+#include "nfo/video.h"
 
 
 ////for testing/////
@@ -222,7 +223,7 @@ void MovieManager::setupUserInterface()
     hTopLayout->addWidget(searchLabel);
     hTopLayout->addWidget(searchBar);
 
-    //creating new hbottomlayout
+    //creating new hbott/home/sandeep/Videos/Gracie.aviomlayout
     hBottomLayout = new QHBoxLayout(mainWindow);
 
 
@@ -371,9 +372,17 @@ void MovieManager::slotSearchBarTextChanged(QString userInput)
 
 void MovieManager::getNepomukData()
 {
-    Nepomuk::Resource *test = new Nepomuk::Resource("/home/sandeep/Videos/Gracie.avi");
-    test->addType(Nepomuk::Vocabulary::NMM::Movie());
-    test->setRating(4);
+    //Nepomuk::Resource *test = new Nepomuk::Resource("/home/sandeep/Videos/Gracie.avi");
+    //test->addType(Nepomuk::Vocabulary::NMM::Movie());
+    //test->setRating(4);
+
+    //Nepomuk::NMM::Movie *mov = new Nepomuk::NMM::Movie(QUrl("/home/sandeep/Videos/Gracie.avi"));
+
+    //Nepomuk::NFO::Video *hello = new Nepomuk::NFO::Video(QUrl("/home/sandeep/Videos/Gracie.avi"));
+
+
+
+    //mov->setActor();
 
     // Nepomuk::Vocabulary::NMM *tes = new Nepomuk::Vocabulary::NMM::Movie();
 
@@ -390,16 +399,20 @@ void MovieManager::getNepomukData()
     //QList<Nepomuk::Resource> resources;
     Q_FOREACH( const Nepomuk::Query::Result& result,results) {
         //addIconToResource(result.resource());
-        qDebug()<<result.resource().genericLabel();
+        //qDebug()<<result.resource().genericLabel();
 
 
         QString temp(result.resource().genericLabel().remove(result.resource().genericLabel().length()-4,4));
 
-        qDebug(temp.toLatin1().data());
+
 
         //s.remove(1, 4);
         if(temp.contains("KDE") != true)
         {
+            qDebug(temp.toLatin1().data());
+            qDebug(result.resource().type().toLatin1().data());
+            qDebug(result.resource().property(Nepomuk::Vocabulary::NIE::url()).toString().toLatin1().data());
+
             IMDB* imdb = new IMDB(temp.toLatin1().data());
             imdb->getData();
             qDebug("finished fetching");
