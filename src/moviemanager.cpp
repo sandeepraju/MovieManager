@@ -292,56 +292,6 @@ void MovieManager::setupUserInterface()
     scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
     */
 
-    /*
-    //------------- list item generator --------------------------------------
-    //creating the poster (artwork) of the movie using QWebView
-
-    QWebView* poster = new QWebView(scrollAreaWidgetContents);
-    poster->load(QUrl("file:///home/sandeep/.moviemanager/avatar2.jpg"));
-    poster->setMinimumSize(320, 474);   //ensuring that the rendering size is const.
-    poster->setMaximumSize(320, 474);   //ensuring that the rendering size is const.
-
-
-    //This is the layout that is to be added to the scrollAreaLayout
-    //tempHLayout acts as a ListItem in the moviemanager
-
-    QHBoxLayout* tempHLayout = new QHBoxLayout(scrollAreaWidgetContents);
-
-    //adding the poster to the tempHLayout --> adding the poster to the ListItem
-    tempHLayout->addWidget(poster);
-
-
-    //This is the Vlayout inside our listitem which is added after the poster
-    //This contains other HLayouts which inturn contain the metadata of the movie
-    QVBoxLayout* insideVLayout = new QVBoxLayout(scrollAreaWidgetContents);
-
-    //this is the layout that contains the metadata. and acts as an item inside a list item. (!important)
-    QHBoxLayout* nameHLayout = new QHBoxLayout(scrollAreaWidgetContents);
-    nameHLayout->addWidget(new QLabel("Title: ", scrollAreaWidgetContents));
-    nameHLayout->addWidget(new QLabel("Avatar", scrollAreaWidgetContents));
-
-
-    QHBoxLayout* directorHLayout = new QHBoxLayout(scrollAreaWidgetContents);
-    directorHLayout->addWidget(new QLabel("Director: ", scrollAreaWidgetContents));
-    directorHLayout->addWidget(new QLabel("James Cameron", scrollAreaWidgetContents));
-
-
-    //adding the rating widget
-    QHBoxLayout* ratingHLayout = new QHBoxLayout(scrollAreaWidgetContents);
-    ratingHLayout->addWidget(new QLabel("Rating: ", scrollAreaWidgetContents));
-    ratingHLayout->addWidget(new KRatingWidget(scrollAreaWidgetContents));
-
-    insideVLayout->addItem(nameHLayout);
-    insideVLayout->addItem(directorHLayout);
-    insideVLayout->addItem(ratingHLayout);
-
-    //finally adding the metadata layout to the ListItem
-    tempHLayout->addItem(insideVLayout);
-
-
-    //------------- list item generator ends--------------------------------
-    //-------------- tempHLayout should be returned ------------------------
-    */
 
     //adding the ListItem into the Main List!!
     scrollAreaVLayout->addItem(createMovieManagerlistItem(scrollAreaWidgetContents));   //instead of passing this, make this the class datamember
@@ -387,14 +337,14 @@ void MovieManager::getNepomukData()
     // Nepomuk::Vocabulary::NMM *tes = new Nepomuk::Vocabulary::NMM::Movie();
 
 
-    Nepomuk::Query::Term term =  Nepomuk::Query::ResourceTypeTerm( Nepomuk::Vocabulary::NFO::Video()) ||
+    Nepomuk::Query::Term term =  Nepomuk::Query::ResourceTypeTerm( Nepomuk::Vocabulary::NFO::Video());/* ||
                 Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(),
-                                               Nepomuk::Query::LiteralTerm(QLatin1String("video")) );
+                                               Nepomuk::Query::LiteralTerm(QLatin1String("video"))*);*/
 
     Nepomuk::Query::Query m_currentQuery;
     m_currentQuery.setTerm(term);
     m_currentQuery.setLimit( 30 );
-    qDebug()<<m_currentQuery.toSparqlQuery();
+    //qDebug()<<m_currentQuery.toSparqlQuery();
     QList<Nepomuk::Query::Result> results = Nepomuk::Query::QueryServiceClient::syncQuery( m_currentQuery );
     //QList<Nepomuk::Resource> resources;
     Q_FOREACH( const Nepomuk::Query::Result& result,results) {
@@ -411,7 +361,22 @@ void MovieManager::getNepomukData()
         {
             qDebug(temp.toLatin1().data());
             qDebug(result.resource().type().toLatin1().data());
-            qDebug(result.resource().property(Nepomuk::Vocabulary::NIE::url()).toString().toLatin1().data());
+            //qDebug(result.resource().property(Nepomuk::Vocabulary::NIE::url()).toString().toLatin1().data());
+
+            if(result.resource().type().compare("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video") != true)
+            {
+                qDebug("not video");
+            }
+            else
+            {
+                qDebug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
+            }
+            //Nepomuk::NFO::Video::
+            result.resource().setProperty("story","lol");
+
+             qDebug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
+            qDebug(result.resource().property("Nepomuk::NFO::Video::frameRate()").toString().toLatin1().data());
+             qDebug("******************************************.");
 
             IMDB* imdb = new IMDB(temp.toLatin1().data());
             imdb->getData();
