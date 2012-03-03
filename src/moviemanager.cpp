@@ -249,49 +249,6 @@ void MovieManager::setupUserInterface()
     //this->setCentralWidget(mainWidget);
 
 
-    //these are the widgets that need to be added to the scrollAreaLayout
-    /*
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    scrollAreaVLayout->addWidget(new KLineEdit("", scrollAreaWidgetContents));
-    */
-
 
     //adding the ListItem into the Main List!!
     scrollAreaVLayout->addItem(createMovieManagerlistItem(scrollAreaWidgetContents));   //instead of passing this, make this the class datamember
@@ -322,6 +279,54 @@ void MovieManager::slotSearchBarTextChanged(QString userInput)
 
 void MovieManager::getNepomukData()
 {
+    //----------------------FUNCTIONALITY------------------------------------------
+    //fetch all the files to a Nepomuk resource list
+    //iterate through the resource list
+    //  if(resource is newly indexed && file_extension == .avi or .flv)
+    //      then fetch data from imdb and populate the fields
+    //
+    //now fetch the files again into the Nepomuk resource list
+    //iterate through the resource list
+    //  if(file_extension == .avi or .flv)
+    //      create a new our_list_item
+    //      and populate to the list
+    //-----------------------------------------------------------------------------
+
+
+    //-----------------------CODE--------------------------------------------------
+
+    //constructing a query
+    Nepomuk::Query::Term term =  Nepomuk::Query::ResourceTypeTerm( Nepomuk::Vocabulary::NFO::Video());
+
+    Nepomuk::Query::Query m_currentQuery;
+    m_currentQuery.setTerm(term);
+    //m_currentQuery.setLimit( 30 );
+    //executing the query
+    QList<Nepomuk::Query::Result> results = Nepomuk::Query::QueryServiceClient::syncQuery( m_currentQuery );
+
+    //first iteration
+    Q_FOREACH( const Nepomuk::Query::Result& result,results) {
+        //QString temp(result.resource().genericLabel().remove(result.resource().genericLabel().length()-4,4));
+        //qDebug(temp.toLatin1().data());
+
+        qDebug() << result.resource().property(Nepomuk::Vocabulary::NFO::fileName()).toString().remove(".avi");
+
+        if(result.resource().property(Nepomuk::Vocabulary::NMM::actor()).toString().length() >= 0
+                && result.resource().genericLabel().contains(".avi") == true) {
+            qDebug() << "FETCHING RESOURCES FOR: " << result.resource().property(Nepomuk::Vocabulary::NFO::fileName()).toString();
+            IMDB* imdb = new IMDB(result.resource().property(Nepomuk::Vocabulary::NFO::fileName()).toString().remove(".avi"), result.resource());
+            imdb->getData();
+
+        }
+        /*else {
+            qDebug()<< result.resource().property(Nepomuk::Vocabulary::NMM::actor()).toString() << "else";
+        }*/
+
+    }
+
+
+    //-----------------------END OF CODE-------------------------------------------
+
     //Nepomuk::Resource *test = new Nepomuk::Resource("/home/sandeep/Videos/Gracie.avi");
     //test->addType(Nepomuk::Vocabulary::NMM::Movie());
     //test->setRating(4);
@@ -337,16 +342,19 @@ void MovieManager::getNepomukData()
     // Nepomuk::Vocabulary::NMM *tes = new Nepomuk::Vocabulary::NMM::Movie();
 
 
-    Nepomuk::Query::Term term =  Nepomuk::Query::ResourceTypeTerm( Nepomuk::Vocabulary::NFO::Video());/* ||
+    //-------old query------------------------------------------
+    /*Nepomuk::Query::Term term =  Nepomuk::Query::ResourceTypeTerm( Nepomuk::Vocabulary::NFO::Video());*/            /* ||
                 Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(),
-                                               Nepomuk::Query::LiteralTerm(QLatin1String("video"))*);*/
+                                                   Nepomuk::Query::LiteralTerm(QLatin1String("video"))*);*/
 
-    Nepomuk::Query::Query m_currentQuery;
-    m_currentQuery.setTerm(term);
-    m_currentQuery.setLimit( 30 );
+    //-----------end of old query ------------------------------------
+    //Nepomuk::Query::Query m_currentQuery;
+    //m_currentQuery.setTerm(term);
+    //m_currentQuery.setLimit( 30 );
     //qDebug()<<m_currentQuery.toSparqlQuery();
-    QList<Nepomuk::Query::Result> results = Nepomuk::Query::QueryServiceClient::syncQuery( m_currentQuery );
+    //QList<Nepomuk::Query::Result> results = Nepomuk::Query::QueryServiceClient::syncQuery( m_currentQuery );
     //QList<Nepomuk::Resource> resources;
+    /*
     Q_FOREACH( const Nepomuk::Query::Result& result,results) {
         //addIconToResource(result.resource());
         //qDebug()<<result.resource().genericLabel();
@@ -359,23 +367,28 @@ void MovieManager::getNepomukData()
         //s.remove(1, 4);
         if(temp.contains("KDE") != true)
         {
+            //This if condition should be removed
             qDebug(temp.toLatin1().data());
             qDebug(result.resource().type().toLatin1().data());
             //qDebug(result.resource().property(Nepomuk::Vocabulary::NIE::url()).toString().toLatin1().data());
 
-            if(result.resource().type().compare("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video") != true)
+            if(result.resource().property(Nepomuk::Vocabulary::NMM::actor()).toString().length() > 0)
             {
-                qDebug("not video");
+                //Newly indexed, data not fetched!
+                //goto imdb and fetch the data
             }
             else
             {
-                qDebug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
+
             }
+
+
             //Nepomuk::NFO::Video::
-            result.resource().setProperty("story","lol");
+           // result.resource().setProperty(Nepomuk::Vocabulary::NMM::actor(),"Rajnikanth");
 
              qDebug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
-            qDebug(result.resource().property("Nepomuk::NFO::Video::frameRate()").toString().toLatin1().data());
+             //qDebug(result.resource().property("Nepomuk::NMM::actor()").toString().toLatin1().data());
+             qDebug()<< result.resource().property(Nepomuk::Vocabulary::NMM::actor()).toString();
              qDebug("******************************************.");
 
             IMDB* imdb = new IMDB(temp.toLatin1().data());
@@ -384,7 +397,7 @@ void MovieManager::getNepomukData()
         }
 
         //resources.append( result.resource() );
-    }
+    }*/
     //resourceSort(resources);
     //m_resourceViewModel->setResources( resources );
 

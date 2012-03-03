@@ -24,11 +24,12 @@
 #include <QVariant>
 #include "qdownloader.h"
 
-IMDB::IMDB(QString queryName)
+IMDB::IMDB(QString queryName, Nepomuk::Resource movieResource)
 {
 
     this->movieName = new QString(queryName.toLatin1().data());
     this->baseURL = new QString("http://www.imdbapi.com/?t=");
+    this->mResource = movieResource;
 }
 
 void IMDB::getData()
@@ -62,82 +63,39 @@ void IMDB::successResponse(QNetworkReply *reply)
       exit (1);
     }
 
-    if(parsedResponse["Response"].toString().compare("True") == 0)
+    if(parsedResponse["Response"].toString().compare("True") == true)
     {
-
-        //Title
-        if(parsedResponse["Title"].toString().contains("N/A") != true)
-        {
-            //extract Title here and set it to nepomuk db
-        }
-        else
-        {
-            qDebug("Title Not found!");
-        }
-
-        //Year
-        if(parsedResponse["Year"].toString().contains("N/A") != true)
-        {
-            //extract Year here and set it to nepomuk db
-        }
-        else
-        {
-            qDebug("Year Not found!");
-        }
-
-        //Rated
-        if(parsedResponse["Rated"].toString().contains("N/A") != true)
-        {
-            //extract Rated here and set it to nepomuk db
-        }
-        else
-        {
-            qDebug("Rated Not found!");
-        }
-
-        //Released
-        if(parsedResponse["Released"].toString().contains("N/A") != true)
-        {
-            //extract Released here and set it to nepomuk db
-        }
-        else
-        {
-            qDebug("Released Not found!");
-        }
-
-        //Genre
-        if(parsedResponse["Genre"].toString().contains("N/A") != true)
-        {
-            //extract Genre here and set it to nepomuk db
-            //!!!! contains multivalues.. BEWARE!
-        }
-        else
-        {
-            qDebug("Genre Not found!");
-        }
-
-        //Director
-        if(parsedResponse["Director"].toString().contains("N/A") != true)
-        {
-            //extract Director here and set it to nepomuk db
-
-        }
-        else
-        {
-            qDebug("Director Not found!");
-        }
-
-        //... and so on...
-
-
-
-
-
 
         qDebug() << "Movie Title:" << parsedResponse["Title"].toString();
 
         QDownloader* downloader = new QDownloader("/home/sandeep/.moviemanager/");
         downloader->setFile(parsedResponse["Poster"].toString());
+
+        /*
+          {"Title":"Avatar",
+            "Year":"2009",
+            "Rated":"PG-13",
+            "Released":"18 Dec 2009",
+            "Genre":"Action, Adventure, Fantasy, Sci-Fi",
+            "Director":"James Cameron",
+            "Writer":"James Cameron",
+            "Actors":"Sam Worthington, Zoe Saldana, Sigourney Weaver, Michelle Rodriguez",
+            "Plot":"A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.",
+            "Poster":"http://ia.media-imdb.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_SX320.jpg",
+            "Runtime":"2 hrs 42 mins",
+            "Rating":"8.1",
+            "Votes":"386930",
+            "ID":"tt0499549",
+            "Response":"True"}
+          */
+
+        //accessing mResource
+        qDebug() << mResource.property(Nepomuk::Vocabulary::NFO::fileName()).toString() << "wohoooo";
+        mResource.setProperty(Nepomuk::Vocabulary::NMM::actor(),"sandeep"/* parsedResponse["Actors"].toString()*/);
+        mResource.setProperty(Nepomuk::Vocabulary::NMM::director(),"pnh");
+        mResource.setProperty(Nepomuk::Vocabulary::NMM::actor(),"pali");
+        //mResource.setProperty(Nepomuk::Vocabulary::NMM::releaseDate(),parsedResponse["Released"]);
+
 
     }
     else

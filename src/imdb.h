@@ -26,12 +26,46 @@
 #include <QtNetwork>
 #include <qjson/parser.h>
 
+#include "nmm/movie.h"
+#include "nfo/video.h"
+
+
+////for testing/////
+///pnh includes
+
+//Nepomuk Includes
+#include <Nepomuk/ResourceManager>
+#include <Nepomuk/Query/Term>
+#include <Nepomuk/Query/Result>
+#include <Nepomuk/Query/ResourceTypeTerm>
+#include <Nepomuk/Query/ComparisonTerm>
+#include <Nepomuk/Query/LiteralTerm>
+#include <Nepomuk/Query/QueryServiceClient>
+#include <Nepomuk/Vocabulary/PIMO>
+#include <Nepomuk/Vocabulary/NCO>
+#include <Nepomuk/Vocabulary/NFO>
+#include <Nepomuk/Vocabulary/NMM>
+#include <Nepomuk/Query/AndTerm>
+#include <Nepomuk/Query/OrTerm>
+#include <Nepomuk/Vocabulary/NIE>
+#include <Nepomuk/Query/QueryParser>
+#include <Nepomuk/Variant>
+#include <Nepomuk/Tag>
+#include <Nepomuk/Utils/FacetWidget>
+#include <Nepomuk/File>
+
+//Soprano includes
+#include <Soprano/QueryResultIterator>
+#include <Soprano/Model>
+#include <Soprano/Vocabulary/NAO>
+
+
 class IMDB: public QObject
 {
     Q_OBJECT
 
 public:
-    IMDB(QString queryName);
+    IMDB(QString queryName, Nepomuk::Resource movieResource);
     virtual ~IMDB();
     void getData();
 
@@ -44,6 +78,7 @@ private:
      QString* baseURL;
      QJson::Parser* parser;
      QVariantMap parsedResponse;
+     Nepomuk::Resource mResource;
 
 };
 
