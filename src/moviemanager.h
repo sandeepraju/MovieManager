@@ -105,10 +105,20 @@ private:
     void setupActions();
     void setupUserInterface();
     void getNepomukData();
-    QHBoxLayout* createMovieManagerlistItem(QWidget*/*, QString mTitle, QString mYear, QString mRated, QString mReleased, QString mGenre, QString mDirector, QString mWriter, QString mActors, QString mPlot, QUrl mPoster, QString mRuntime, QString mIMDBRating, QString mVotes, QString mID, QString mResponse*/);
+    QHBoxLayout* createMovieManagerlistItem(QWidget*,
+                                            QString mTitle, QString mReleased,
+                                            quint32 mRated, QString mGenre,
+                                            QString mDirector, QString mWriter,
+                                            QString mActors, QString mPlot,
+                                            QUrl mPoster, QString mRuntime,
+                                            QString mIMDBRating);
     void populateResources();
 
 private:
+    QList<Nepomuk::Query::Result> globalResults;
+    QWidget * scrollAreaWidgetContents;
+    QVBoxLayout * scrollAreaVLayout;
+    QList<QHBoxLayout*> resultListRef;
     //Ui::prefs_base ui_prefs_base ;
     //MovieManagerView *m_view;
     QScrollArea* mainListScroll;

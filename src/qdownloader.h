@@ -33,7 +33,7 @@ class QDownloader : public QObject
 {
     Q_OBJECT
 public:
-    explicit QDownloader(QString, QObject *parent = 0);
+    explicit QDownloader(QString, QString, QObject *parent = 0);
     virtual ~QDownloader();
     void setFile(QString fileURL);
 
@@ -42,6 +42,7 @@ private:
     QNetworkReply *reply;
     QFile *file;
     QString imagePath;
+    QString fileName;
 
 private slots:
     void onDownloadProgress(qint64,qint64);

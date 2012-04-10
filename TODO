@@ -1,0 +1,32 @@
+1. build the list item and make a final version of it
+2. build the list from fetching nepomuk data
+3. handle that check and download based on some parameter
+4.
+
+
+-------------------
+first find out ranges
+   NFO   
+	  duration -> xsd:duration  (can this be set or not?) [what is xsd:duration]
+	  filename -> xsd:string
+   NMM
+	  director  -> nco:contact
+	  actor  -> nco:contact
+	  artwork -> nfo:image
+	  assistantdirector -> nco:contact
+	  audiencerating  -> nao:rating
+	  cinematographer -> nco:contact
+	  composer   -> nco contact
+	  genre	-> xsd:string
+	  producer  -> nco:contact
+	  releasedate -> xsd:dateTime
+	  writer  -> nco:contact
+	  synopsis  -> nie:description
+   NIE
+	  language -> xsd:string
+
+-----------------
+ontyped and enter pressed
+scroll areawidget contents->setlayout(resultVlayout)
+resultVLayout->setsizeconstraints(QLayout::setFixedsize)
+ QVBoxLayout * scrollAreaVLayout = new QVBoxLayout(mainWindow);

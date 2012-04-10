@@ -23,6 +23,14 @@
 #include <QDebug>
 #include <QVariant>
 #include "qdownloader.h"
+//#include "nco/contact.h"
+#include <Nepomuk/Vocabulary/NCO>
+#include <Nepomuk/Vocabulary/NMM>
+#include "nfo/image.h"
+#include "nfo/webdataobject.h"
+#include "nco/contact.h"
+
+
 
 IMDB::IMDB(QString queryName, Nepomuk::Resource movieResource)
 {
@@ -48,7 +56,7 @@ void IMDB::successResponse(QNetworkReply *reply)
 {
     QByteArray data = reply->readAll();
     this->responseJSON = new QString(data);
-    qDebug("got successfully!");
+    //qDebug("got successfully!");
     //qDebug(this->responseJSON->toLatin1().data());
 
     //QJson::Parser parser;
@@ -63,12 +71,12 @@ void IMDB::successResponse(QNetworkReply *reply)
       exit (1);
     }
 
-    if(parsedResponse["Response"].toString().compare("True") == true)
+    if(true/*parsedResponse["Response"].toString().compare("True") == 0*/)
     {
 
         qDebug() << "Movie Title:" << parsedResponse["Title"].toString();
 
-        QDownloader* downloader = new QDownloader("/home/sandeep/.moviemanager/");
+        QDownloader* downloader = new QDownloader("/home/sandeep/.moviemanager/", parsedResponse["ID"].toString() + ".jpg");
         downloader->setFile(parsedResponse["Poster"].toString());
 
         /*
@@ -89,12 +97,57 @@ void IMDB::successResponse(QNetworkReply *reply)
             "Response":"True"}
           */
 
+        /*
+            // create all the regular actor resources which we will add to all episodes
+             QList<Nepomuk::NCO::Contact> regularActors;
+             foreach(const QString& actor, series.actors()) {
+                 Nepomuk::NCO::Contact contact;
+                 contact.setFullname(actor);
+                 regularActors << contact;
+                 graph << contact;
+             }
+
+        */
+
+       Nepomuk::Resource tempActor;
+       tempActor.addType(Nepomuk::Vocabulary::NCO::Contact());
+       tempActor.setLabel(QString("Phaneendra hegde"));
+
+
         //accessing mResource
         qDebug() << mResource.property(Nepomuk::Vocabulary::NFO::fileName()).toString() << "wohoooo";
-        mResource.setProperty(Nepomuk::Vocabulary::NMM::actor(),"sandeep"/* parsedResponse["Actors"].toString()*/);
-        mResource.setProperty(Nepomuk::Vocabulary::NMM::director(),"pnh");
-        mResource.setProperty(Nepomuk::Vocabulary::NMM::actor(),"pali");
-        //mResource.setProperty(Nepomuk::Vocabulary::NMM::releaseDate(),parsedResponse["Released"]);
+        //how to add another actor? tvnamer.cpp line no.333 to 340
+//        mResource.setProperty(Nepomuk::Vocabulary::NMM::actor(),parsedResponse["Actors"].toString());
+        qDebug() << parsedResponse["Actors"].toString();
+        qDebug() << parsedResponse["Director"].toString();
+//        qDebug() << parsedResponse["Actors"].toString();
+//        qDebug() << parsedResponse["Actors"].toString();
+//        qDebug() << parsedResponse["Actors"].toString();
+        //mResource.addProperty(QUrl::fromEncoded("http://www.semanticdesktop.org/ontologies/2009/02/19/nmm#hero", QUrl::StrictMode),"Upendra");
+
+        //mResource.setProperty(Nepomuk::Vocabulary::NMM::artwork(),parsedResponse["Poster"].toString());//qurl
+        /*mResource.setProperty(Nepomuk::Vocabulary::NMM::director(),parsedResponse["Director"].toString());
+        mResource.setProperty(Nepomuk::Vocabulary::NMM::writer(),parsedResponse["Writer"].toString());
+        mResource.setProperty(Nepomuk::Vocabulary::NMM::genre(),parsedResponse["Genre"].toString());
+        mResource.setProperty(Nepomuk::Vocabulary::NMM::releaseDate(),parsedResponse["Released"].toString());
+        mResource.setProperty(Nepomuk::Vocabulary::NMM::audienceRating(),parsedResponse["Rating"].toString());
+        mResource.setProperty(Nepomuk::Vocabulary::NMM::actor(),tempActor);
+        */
+        Nepomuk::Resource tempActor2;
+        tempActor2.addType(Nepomuk::Vocabulary::NCO::Contact());
+        tempActor2.setLabel(QString("Vijay Mahantesh"));
+
+        mResource.setProperty(Nepomuk::Vocabulary::NMM::writer(),tempActor2 );
+
+        mResource.setProperty(Nepomuk::Vocabulary::NMM::synopsis(),parsedResponse["ID"].toString());
+
+        Nepomuk::Resource* tempImage = new Nepomuk::Resource("/home/sandeep/.moviemanager/"+parsedResponse["ID"].toString() +".jpg");
+        tempImage->addType(Nepomuk::Vocabulary::NFO::Image());
+        //tempActor.set
+
+        mResource.setProperty(Nepomuk::Vocabulary::NMM::artwork(),*tempImage);
+
+        //mResource.setProperty(Nepomuk::Vocabulary);
 
 
     }

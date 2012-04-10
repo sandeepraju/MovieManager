@@ -22,10 +22,11 @@
 #include <QDir>
 #include <QDebug>
 
-QDownloader::QDownloader(QString path, QObject *parent) :
+QDownloader::QDownloader(QString path, QString fName, QObject *parent) :
     QObject(parent)
 {
     imagePath = path;
+    fileName = fName;
 
     qDebug(imagePath.toLatin1().data());
 
@@ -49,7 +50,7 @@ void QDownloader::setFile(QString fileURL)
     QString filePath = fileURL;
     QString saveFilePath;
     QStringList filePathList = filePath.split('/');
-    QString fileName = filePathList.at(filePathList.count() - 1);
+    //QString fileName = filePathList.at(filePathList.count() - 1);
     saveFilePath = QString( imagePath + fileName );
 
     QNetworkRequest request;

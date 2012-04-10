@@ -1,0 +1,14 @@
+SOURCES:
+/home/sandeep/SpecialTopic/moviemanager/src/moviemanager.cpp;/home/sandeep/SpecialTopic/moviemanager/src/main.cpp;/home/sandeep/SpecialTopic/moviemanager/src/imdb.cpp;/home/sandeep/SpecialTopic/moviemanager/src/qdownloader.cpp
+MOC_COMPILE_DEFINITIONS:
+_BSD_SOURCE
+MOC_DEFINITIONS:
+ -D_BSD_SOURCE
+MOC_INCLUDES:
+/home/sandeep/kde/inst/master/include;/home/sandeep/kde/inst/master/include/KDE;/usr/include/qt4/phonon;/usr/include/qt4/QtXmlPatterns;/usr/include/qt4/QtXml;/usr/include/qt4/QtWebKit;/usr/include/qt4/QtUiTools;/usr/include/qt4/QtTest;/usr/include/qt4/QtSvg;/usr/include/qt4/QtSql;/usr/include/qt4/QtScriptTools;/usr/include/qt4/QtScript;/usr/include/qt4/QtOpenGL;/usr/include/qt4/QtNetwork;/usr/include/qt4/QtHelp;/usr/include/qt4/QtDesigner;/usr/include/qt4/QtDeclarative;/usr/include/qt4/QtDBus;/usr/include/qt4/Qt3Support;/usr/include/qt4/QtGui;/usr/include/qt4/QtCore;/usr/include/qt4/Qt;/usr/share/qt4/mkspecs/default;/usr/include/qt4;/usr/include;/home/sandeep/SpecialTopic/moviemanager/src;/home/sandeep/SpecialTopic/moviemanager/src
+CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE:
+ON
+CMAKE_BINARY_DIR:
+/home/sandeep/SpecialTopic/moviemanager
+CMAKE_SOURCE_DIR:
+/home/sandeep/SpecialTopic/moviemanager
