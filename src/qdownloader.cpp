@@ -22,6 +22,7 @@
 #include <QDir>
 #include <QDebug>
 
+
 QDownloader::QDownloader(QString path, QString fName, QObject *parent) :
     QObject(parent)
 {

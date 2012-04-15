@@ -33,6 +33,29 @@
 #include <QListView>
 #include <QUrl>
 #include<QScrollArea>
+#include <QListView>
+
+//Qt includes
+#include <QMessageBox>
+#include <QListView>
+#include <QDockWidget>
+#include <QGridLayout>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QDebug>
+#include <QButtonGroup>
+#include <QToolButton>
+#include <QMenu>
+#include <QLabel>
+#include <QSize>
+#include <QFile>
+#include <QIODevice>
+#include <QTextStream>
+#include <QHash>
+
+#include <QToolButton>
+#include <QComboBox>
+
 ///pnh includes
 
 //Nepomuk Includes
@@ -48,6 +71,7 @@
 #include <Nepomuk/Vocabulary/NFO>
 #include <Nepomuk/Query/AndTerm>
 #include <Nepomuk/Query/OrTerm>
+#include <Nepomuk/Query/ResourceTerm>
 #include <Nepomuk/Vocabulary/NIE>
 #include <Nepomuk/Query/QueryParser>
 #include <Nepomuk/Variant>
@@ -59,6 +83,11 @@
 #include <Soprano/QueryResultIterator>
 #include <Soprano/Model>
 #include <Soprano/Vocabulary/NAO>
+
+//Nepomuk includes
+#include <Nepomuk/Utils/SimpleResourceModel>
+#include <Nepomuk/Query/Term>
+#include <Nepomuk/Query/Query>
 
 
 ///////////////
@@ -102,6 +131,7 @@ private slots:
     void slotPlayVideo(QUrl);
 
 private:
+
     void setupActions();
     void setupUserInterface();
     void getNepomukData();
@@ -136,6 +166,22 @@ private:
 
     QHBoxLayout* hTopLayout;
     QHBoxLayout* hBottomLayout;
+
+    //NEW CODE GOES HERE
+    // m_resourceView == resultPanel
+    QListView* resultPanel;
+    Nepomuk::Utils::SimpleResourceModel* m_resourceViewModel;
+private:
+    void setupNewUserInterface();
+    void setupNewModels();
+    void populateDefaultResources();
+    void addIconToResource(Nepomuk::Resource);
+    void resourceSort(QList<Nepomuk::Resource> &resources);
+
+private slots:
+    void slotResultPanelSelectionChanged();
+    void slotOpenResource(QModelIndex);
+    //NEW CODE ENDS HERE
 };
 
 #endif // _MOVIEMANAGER_H_

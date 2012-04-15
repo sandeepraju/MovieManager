@@ -19,7 +19,6 @@
  ***************************************************************************/
 
 #include "moviemanager.h"
-//#include "moviemanagerview.h"
 
 #include "imdb.h"
 
@@ -45,13 +44,28 @@
 #include <QWebView>
 #include <KRatingWidget>
 
+#include <QListView>
+
+//Qt includes
+#include <QMessageBox>
+#include <QListView>
+#include <QDockWidget>
+#include <QGridLayout>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QDebug>
+#include <QButtonGroup>
+#include <QToolButton>
+#include <QMenu>
+#include <QLabel>
+#include <QSize>
+#include <QFile>
+#include <QIODevice>
+#include <QTextStream>
+#include <QHash>
 
 #include "nmm/movie.h"
 #include "nfo/video.h"
-
-
-////for testing/////
-///pnh includes
 
 //Nepomuk Includes
 #include <Nepomuk/ResourceManager>
@@ -79,21 +93,18 @@
 #include <Soprano/Model>
 #include <Soprano/Vocabulary/NAO>
 
+//Nepomuk includes
+#include <Nepomuk/Utils/SimpleResourceModel>
+#include <Nepomuk/Query/Term>
+#include <Nepomuk/Query/Query>
 
-///////////////
-
+#include <QToolButton>
+#include <QComboBox>
 
 ///// for playing video /////
-
 #include <QDesktopServices>
 #include <QUrl>
 #include <QHash>
-
-/////////////////////////////
-
-
-
-////////////////////
 
 MovieManager::MovieManager()
     : KXmlGuiWindow(),
@@ -114,19 +125,13 @@ MovieManager::MovieManager()
     statusBar()->show();
 
     //getNepomukData();
-
-
     //MovieManager UI is setup here
     setupUserInterface();
     ///////////////////////////////
 
-
-
-
-
-
-
-    //slotPlayVideo(QUrl("file:///home/sandeep/Videos/Gracie.avi"));
+    //setupNewUserInterface();
+    //setupNewModels();
+    //populateDefaultResources();
 
     // a call to KXmlGuiWindow::setupGUI() populates the GUI
     // with actions, using KXMLGUI.
@@ -172,23 +177,23 @@ void MovieManager::fileNew()
 
 void MovieManager::optionsPreferences()
 {
-    /*
+
     // The preference dialog is derived from prefs_base.ui
     //
     // compare the names of the widgets in the .ui file
     // to the names of the variables in the .kcfg file
     //avoid to have 2 dialogs shown
-    if ( KConfigDialog::showDialog( "settings" ) )  {
-        return;
-    }
-    KConfigDialog *dialog = new KConfigDialog(this, "settings", Settings::self());
-    QWidget *generalSettingsDlg = new QWidget;
-    ui_prefs_base.setupUi(generalSettingsDlg);
-    dialog->addPage(generalSettingsDlg, i18n("General"), "package_setting");
-    connect(dialog, SIGNAL(settingsChanged(QString)), m_view, SLOT(settingsChanged()));
-    dialog->setAttribute( Qt::WA_DeleteOnClose );
-    dialog->show();
-*/
+//    if ( KConfigDialog::showDialog( "settings" ) )  {
+//        return;
+//    }
+//    KConfigDialog *dialog = new KConfigDialog(this, "settings", Settings::self());
+//    QWidget *generalSettingsDlg = new QWidget;
+//    ui_prefs_base.setupUi(generalSettingsDlg);
+//    dialog->addPage(generalSettingsDlg, i18n("General"), "package_setting");
+//    connect(dialog, SIGNAL(settingsChanged(QString)), m_view, SLOT(settingsChanged()));
+//    dialog->setAttribute( Qt::WA_DeleteOnClose );
+//    dialog->show();
+
 }
 
 void MovieManager::slotQuitApplication()
@@ -198,6 +203,150 @@ void MovieManager::slotQuitApplication()
     qDebug("quitting!");
     Qt:exit(0); //this is generating some warning
 }
+
+//NEW APPLICATION GOES HERE
+void MovieManager::setupNewUserInterface()
+{
+    mainWindow = new QWidget(this);
+    vMainLayout = new QVBoxLayout(mainWindow);
+    hTopLayout = new QHBoxLayout(mainWindow);
+
+    mainWindow->setLayout(vMainLayout);
+
+    searchLabel = new QLabel("Search:  ",mainWindow);
+    searchBar = new KLineEdit("",mainWindow);
+
+    connect(searchBar,SIGNAL(returnPressed(QString)),this,SLOT(slotSearchBarTextChanged(QString)));
+
+    vMainLayout->addItem(hTopLayout);
+    hTopLayout->addWidget(searchLabel);
+    hTopLayout->addWidget(searchBar);
+
+    //setting up the result panel
+    resultPanel = new QListView(mainWindow);
+    resultPanel->setContextMenuPolicy(Qt::CustomContextMenu);
+    resultPanel->setViewMode(resultPanel->ListMode);
+    resultPanel->setSpacing(50);
+    //QStyle* tempStyle = new QStyle();
+    //resultPanel->setStyle();
+    //resultPanel->setBaseSize(100,100);
+    resultPanel->setIconSize(QSize(42,42));
+    resultPanel->setUniformItemSizes(true);
+
+    //connecting the result panel item doubleclick to a slot
+    connect(resultPanel,SIGNAL(clicked(QModelIndex)),this,SLOT(slotOpenResource(QModelIndex)));
+
+    vMainLayout->addWidget(resultPanel);
+
+    //query nepomuk and check if the IMDB_ID has been set. If so, then add the resource
+    //to the list else check if it is NA
+    //if it is NA ignore
+    //else call the imdb function to populate the resources
+    //after populating the resource, add to this result list.
+
+
+
+    setCentralWidget(mainWindow);
+
+}
+
+void MovieManager::populateDefaultResources()
+{
+    m_resourceViewModel->clear();
+
+    Nepomuk::Query::Term term =  Nepomuk::Query::ResourceTypeTerm( Nepomuk::Vocabulary::NFO::Video());
+    Nepomuk::Query::Query m_currentQuery;
+    m_currentQuery.setTerm(term);
+    QList<Nepomuk::Query::Result> results = Nepomuk::Query::QueryServiceClient::syncQuery( m_currentQuery );
+    QList<Nepomuk::Resource> resources;
+
+    Q_FOREACH( const Nepomuk::Query::Result& result,results) {
+        addIconToResource(result.resource());
+        qDebug()<<result.resource().property(Nepomuk::Vocabulary::NFO::fileName()).toString();
+        resources.append( result.resource() );
+    }
+    resourceSort(resources);
+
+    m_resourceViewModel->setResources( resources );
+
+
+}
+
+void MovieManager::resourceSort(QList<Nepomuk::Resource> &resources)
+{
+    for (int i=0; i<resources.size()-1; i++) {
+        for (int j=0; j<resources.size()-1; j++) {
+            if (resources.at(j).usageCount() < resources.at(j+1).usageCount()) {
+                Nepomuk::Resource temp = resources.at(j);
+                resources.replace(j,resources.at(j+1));
+                resources.replace(j+1,temp);
+            }
+        }
+    }
+}
+
+void MovieManager::addIconToResource(Nepomuk::Resource rsc)
+{
+    rsc.addSymbol("folder-blue");
+
+    /*if(rsc.className().compare("Folder") == 0) {
+        rsc.addSymbol("folder-blue");
+    }
+    else if(rsc.className().compare("RasterImage") == 0) {
+        rsc.addSymbol("image-x-generic");
+    }
+    else if(rsc.className().compare("Document") == 0) {
+        rsc.addSymbol("libreoffice34-oasis-master-document");
+    }
+    else if(rsc.className().compare("Audio") == 0) {
+        rsc.addSymbol("audio-basic");
+    }
+    else if(rsc.className().compare("InformationElement") == 0) {
+        rsc.addSymbol("video-x-generic");
+    }
+    else if(rsc.className().compare("TextDocument") == 0) {
+        rsc.addSymbol("text-x-generic");
+    }
+    else if(rsc.className().compare("PaginatedTextDocument") == 0) {
+        rsc.addSymbol("application-pdf");
+    }
+    else if(rsc.className().compare("Archive") == 0) {
+        rsc.addSymbol("application-x-archive");
+    }
+    else if(rsc.className().compare("Person") == 0){
+        rsc.addSymbol("user-identity");
+    }
+    else if(rsc.className().compare("Website") == 0) {
+        rsc.addSymbol("text-html");
+    }*/
+
+}
+
+void MovieManager::setupNewModels()
+{
+    m_resourceViewModel = new Nepomuk::Utils::SimpleResourceModel(this);
+    resultPanel->setModel(m_resourceViewModel);
+    connect(resultPanel->selectionModel(),SIGNAL(selectionChanged(QItemSelection,QItemSelection)),this,SLOT(slotResultPanelSelectionChanged()));
+    //connect(resultPanel->selectionModel(),SIGNAL(selectionChanged(QItemSelection,QItemSelection)),this,SLOT(slotRecommendedResources()));
+
+
+}
+
+void MovieManager::slotResultPanelSelectionChanged()
+{
+    qDebug() << "selection changed";
+}
+
+void MovieManager::slotOpenResource(QModelIndex)
+{
+    qDebug() << "helloWorld";
+
+    //this will be triggered when we double click on the movie item.
+    //here new dialog box needs to be opened...
+    //then we need to query nnepomuk only for that movie name and show them.
+}
+
+//NEW APPLICATION ENDS HERE
 
 void MovieManager::setupUserInterface()
 {
@@ -251,16 +400,6 @@ void MovieManager::setupUserInterface()
     scrollArea->setWidget(scrollAreaWidgetContents);
     //this->setCentralWidget(mainWidget);
 
-
-
-    //adding the ListItem into the Main List!!
-    //scrollAreaVLayout->addItem(createMovieManagerlistItem(scrollAreaWidgetContents));   //instead of passing this, make this the class datamember
-    //scrollAreaVLayout->addItem(createMovieManagerlistItem(scrollAreaWidgetContents));
-
-    //proposed function
-    //for temporary purposes.
-
-
     //////////ALL THESE BELOW SHOULD BE SET BY FETCHING DATA FROM NEPOMUK//////////////////
     /////PUT A FOR LOOP AND DO ALL THE THINGS...
 
@@ -288,13 +427,6 @@ void MovieManager::setupUserInterface()
             qDebug() << key;
         }
 
-        /*Q_FOREACH( Nepomuk::Variant p ,pList)
-        {
-            qDebug() << "-------START---------";
-
-            qDebug() << "-------END---------";
-        }*/
-
         qDebug() << "-------------------vHanda END--------------*********";
 
 
@@ -313,43 +445,7 @@ void MovieManager::setupUserInterface()
 
     }
 
-    //scrollAreaVLayout->
-    /*scrollAreaVLayout->addItem(createMovieManagerlistItem(scrollAreaWidgetContents,
-                                                          QString("tavaralle"),QString("08-05-1991"),
-                                                          QString("4"),QString("Comedy"),
-                                                          QString("sadan"),QString("Swamy"),
-                                                          QString("sumanth"),QString("The specification for the next stage is the output of the each design activity. This specification may be an abstract, formal specification that is produced to clarify the requirements or it may be a specification of how part of the system is to be realized."),
-                                                          QUrl("file:///home/sandeep/.moviemanager/lagaan.jpg"),QString("2:30 mins"),
-                                                          QString("3")));
-
-
-    scrollAreaVLayout->addItem(createMovieManagerlistItem(scrollAreaWidgetContents,
-                                                          QString("avatar"),QString("08-05-1991"),
-                                                          QString("4"),QString("Comedy"),
-                                                          QString("Vijesh"),QString("Swamy"),
-                                                          QString("Vijay"),QString("hello world, this is PESIT"),
-                                                          QUrl("file:///home/sandeep/.moviemanager/avatar2.jpg"),QString("2:30 mins"),
-                                                          QString("3")));
-
-    scrollAreaVLayout->addItem(createMovieManagerlistItem(scrollAreaWidgetContents,
-                                                          QString("avatar"),QString("08-05-1991"),
-                                                          QString("4"),QString("Comedy"),
-                                                          QString("Vijesh"),QString("Swamy"),
-                                                          QString("Vijay"),QString("hello world, this is PESIT"),
-                                                          QUrl("file:///home/sandeep/.moviemanager/avatar2.jpg"),QString("2:30 mins"),
-                                                          QString("3")));
-
-    scrollAreaVLayout->addItem(createMovieManagerlistItem(scrollAreaWidgetContents,
-                               createMovieManagerlistItem                           QString("avatar"),QString("08-05-1991"),
-                                                          QString("4"),QString("Comedy"),
-                                                          QString("Vijesh"),QString("Swamy"),
-                                                          QString("Vijay"),QString("hello world, this is PESIT"),
-                                                          QUrl("file:///home/sandeep/.moviemanager/avatar2.jpg"),QString("2:30 mins"),
-                                                          QString("3")));
-    */
-    //scrollAreaVLayout->addItem(createMovieManagerlistItem(scrollAreaWidgetContents,"avatar","08-05-1991","4","Comedy","Vijesh","Swamy", "Vijay","hello world, this is PESIT",QUrl("/home/sandeep/.moviemanager/avatar2.jpg"),"2:30 mins","3"));
-    //, QString mTitle, QString mReleased, QString mRated, QString mGenre, QString mDirector, QString mWriter, QString mActors, QString mPlot, QUrl mPoster, QString mRuntime, QString mIMDBRating
-    hBottomLayout->addItem(vLayout);
+       hBottomLayout->addItem(vLayout);
 
     setCentralWidget(mainWindow);
 
@@ -366,56 +462,6 @@ void MovieManager::slotSearchBarTextChanged(QString userInput)
 
 
 
-    //query nepomuk or from the results already generated and display appropriate things in the list!
-
-//    int count = 0;
-//    Q_FOREACH( const Nepomuk::Query::Result& globalResult, globalResults) {
-//        qDebug() << count;
-
-//        if(globalResult.resource().genericLabel().contains(userInput) == false)
-//        {
-
-//            //QHBoxLayout* tempRef;
-//            qDebug() << "count inside if"<< count;
-
-//            scrollAreaVLayout->removeItem(resultListRef[count]);
-    //scrollAreaVLayout->removeItem(resultListRef[0]);
-    QLayoutItem *child;
-     /*while ((*/child = scrollAreaVLayout->takeAt(0);/*) != 0) {*/
-
-         //delete child;
-//     }
-    //;
-    //delete resultListRef[0];
-    //scrollAreaVLayout->removeItem(resultListRef[1]);
-//    scrollAreaVLayout->removeItem(resultListRef[2]);
-//    scrollAreaVLayout->removeItem(resultListRef[3]);
-//    scrollAreaVLayout->removeItem(resultListRef[4]);
-//    scrollAreaVLayout->removeItem(resultListRef[5]);
-//    scrollAreaVLayout->removeItem(resultListRef[6]);
-//    scrollAreaVLayout->removeItem(resultListRef[7]);
-//    scrollAreaVLayout->removeItem(resultListRef[8]);
-//    scrollAreaVLayout->removeItem(resultListRef[9]);
-//    scrollAreaVLayout->removeItem(resultListRef[10]);
-//    scrollAreaVLayout->removeItem(resultListRef[11]);
-//    scrollAreaVLayout->removeItem(resultListRef[12]);
-//    //scrollAreaVLayout->removeItem(resultListRef[13]);
-
-//            count++;
-//            //resultListRef.push_back(tempRef);
-//        }
-
-//    }
-
-
-    /*scrollAreaVLayout->addItem(createMovieManagerlistItem(scrollAreaWidgetContents,
-                                                          QString("SANDEEP RAJU P"),QString("08-05-1991"),
-                                                          QString("4"),QString("Comedy"),
-                                                          QString("Fun"),QString("Hahaha"),
-                                                          QString("sumanth"),QString("The specification for the next stage is the output of the each design activity. This specification may be an abstract, formal specification that is produced to clarify the requirements or it may be a specification of how part of the system is to be realized."),
-                                                          QUrl("file:///home/sandeep/.moviemanager/lagaan.jpg"),QString("2:30 mins"),
-                                                          QString("3")));
-*/
 
 }
 
@@ -473,32 +519,13 @@ void MovieManager::getNepomukData()
             //temporarily disabled (for faster startup)
             imdb->getData();
 
-            //Nepomuk::Resource tempActor;
-            //tempActor.addType(Nepomuk::Vocabulary::NCO::Contact());
-            //tempActor.setLabel(QString("Phaneendra hegde"));
-
-            //result.resource().setProperty(Nepomuk::Vocabulary::NMM::actor(),tempActor);
-
-            //qDebug() << "actor is set...";
-
-             //the latest actor will be added to actor field.. so..
-             //need to create a actor variant list and sent it instead?
-
-            //Nepomuk::Resource tempActor2;
-            //tempActor2.addType(Nepomuk::Vocabulary::NCO::Contact());
-            //tempActor2.setLabel(QString("Phalgun Guduthur"));
-
-            //result.resource().setProperty(Nepomuk::Vocabulary::NMM::actor(),tempActor2);
-
-            //qDebug() << "actor is set... again";
-
             Nepomuk::Resource* tempImage = new Nepomuk::Resource("/home/sandeep/.moviemanager/lagaan.jpg");
             tempImage->addType(Nepomuk::Vocabulary::NFO::Image());
             //tempActor.set
 
             result.resource().setProperty(Nepomuk::Vocabulary::NMM::artwork(),*tempImage);
 
-            //result.resource().setProperty(Nepomuk::Vocabulary::NFO::FileHash(),*tempImage);
+
 
             qDebug() << "POSTER URL>>>>>>>> " << result.resource().property(Nepomuk::Vocabulary::NMM::artwork()).toString();
 
@@ -509,89 +536,12 @@ void MovieManager::getNepomukData()
 
 
         }
-        /*else {
-            qDebug()<< result.resource().property(Nepomuk::Vocabulary::NMM::actor()).toString() << "else";
-        }*/
-        //**FOR LOOP ENDS HERE
+
 
     }
 
 
-    //-----------------------END OF CODE-------------------------------------------
 
-    //Nepomuk::Resource *test = new Nepomuk::Resource("/home/sandeep/Videos/Gracie.avi");
-    //test->addType(Nepomuk::Vocabulary::NMM::Movie());
-    //test->setRating(4);
-
-    //Nepomuk::NMM::Movie *mov = new Nepomuk::NMM::Movie(QUrl("/home/sandeep/Videos/Gracie.avi"));
-
-    //Nepomuk::NFO::Video *hello = new Nepomuk::NFO::Video(QUrl("/home/sandeep/Videos/Gracie.avi"));
-
-
-
-    //mov->setActor();
-
-    // Nepomuk::Vocabulary::NMM *tes = new Nepomuk::Vocabulary::NMM::Movie();
-
-
-    //-------old query------------------------------------------
-    /*Nepomuk::Query::Term term =  Nepomuk::Query::ResourceTypeTerm( Nepomuk::Vocabulary::NFO::Video());*/            /* ||
-                Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(),
-                                                   Nepomuk::Query::LiteralTerm(QLatin1String("video"))*);*/
-
-    //-----------end of old query ------------------------------------
-    //Nepomuk::Query::Query m_currentQuery;
-    //m_currentQuery.setTerm(term);
-    //m_currentQuery.setLimit( 30 );
-    //qDebug()<<m_currentQuery.toSparqlQuery();
-    //QList<Nepomuk::Query::Result> results = Nepomuk::Query::QueryServiceClient::syncQuery( m_currentQuery );
-    //QList<Nepomuk::Resource> resources;
-    /*
-    Q_FOREACH( const Nepomuk::Query::Result& result,results) {
-        //addIconToResource(result.resource());
-        //qDebug()<<result.resource().genericLabel();
-
-
-        QString temp(result.resource().genericLabel().remove(result.resource().genericLabel().length()-4,4));
-
-
-
-        //s.remove(1, 4);
-        if(temp.contains("KDE") != true)
-        {
-            //This if condition should be removed
-            qDebug(temp.toLatin1().data());
-            qDebug(result.resource().type().toLatin1().data());
-            //qDebug(result.resource().property(Nepomuk::Vocabulary::NIE::url()).toString().toLatin1().data());
-
-            if(result.resource().property(Nepomuk::Vocabulary::NMM::actor()).toString().length() > 0)
-            {
-                //Newly indexed, data not fetched!
-                //goto imdb and fetch the data
-            }
-            else
-            {
-
-            }
-
-
-            //Nepomuk::NFO::Video::
-           result.resource().setProperty(Nepomuk::Vocabulary::NMM::actor(),"Rajnikanth");
-
-             qDebug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
-             //qDebug(result.resource().property("Nepomuk::NMM::actor()").toString().toLatin1().data());
-             qDebug()<< result.resource().property(Nepomuk::Vocabulary::NMM::actor()).toString();
-             qDebug("******************************************.");
-
-            IMDB* imdb = new IMDB(temp.toLatin1().data());
-            imdb->getData();
-            qDebug("finished fetching");
-        }
-
-        //resources.append( result.resource() );
-    }*/
-    //resourceSort(resources);
-    //m_resourceViewModel->setResources( resources );
 
 
 }
@@ -609,106 +559,7 @@ QHBoxLayout* MovieManager::createMovieManagerlistItem(QWidget* scrollAreaWidgetC
                                                       QUrl mPoster, QString mRuntime,
                                                       QString mIMDBRating)
 {
-    //important - next todo
 
-    //This function generates the pseudo list item in the movie manager
-    //based on the metadata passed as the parameters to this function
-    //it returns a pointer to QHBoxLayout
-
-    //QHBoxLayout* hItem = new QHBoxLayout(mainWindow);
-    /*QLabel* image = new QLabel("", mainWindow);
-    image->setPixmap(QPixmap("/home/sandeep/.moviemanager/avatar.jpg"));
-    QLabel* mName = new QLabel("avatar", mainWindow);
-    KPushButton* mPlay = new KPushButton("PLAY", mainWindow);
-
-    hItem->addWidget(image);
-    hItem->addWidget(mName);
-    hItem->addWidget(mPlay);
-    */
-    //return hItem;
-
-
-    //------------- list item generator --------------------------------------
-    //creating the poster (artwork) of the movie using QWebView
-
-    /*QWebView* poster = new QWebView(scrollAreaWidgetContents);
-    poster->load(mPoster);
-    //poster->load(QUrl("file:///home/sandeep/.moviemanager/avatar2.jpg"));
-    //poster->setMinimumSize(320, 474);   //ensuring that the rendering size is const.
-    //poster->setMaximumSize(320, 474);   //ensuring that the rendering size is const.
-    poster->setMinimumSize(200,290);
-    poster->setMaximumSize(200,290);
-
-    //This is the layout that is to be added to the scrollAreaLayout
-    //tempHLayout acts as a ListItem in the moviemanager
-
-    QHBoxLayout* tempHLayout = new QHBoxLayout(scrollAreaWidgetContents);
-
-    //adding the poster to the tempHLayout --> adding the poster to the ListItem
-    tempHLayout->addWidget(poster);
-
-
-    //This is the Vlayout inside our listitem which is added after the poster
-    //This contains other HLayouts which inturn contain the metadata of the movie
-
-    QVBoxLayout* insideVLayout = new QVBoxLayout(scrollAreaWidgetContents);
-
-    //this is the layout that contains the metadata. and acts as an item inside a list item. (!important)
-
-    /*QHBoxLayout* testHLayout = new QHBoxLayout(scrollAreaWidgetContents);
-    testHLayout->addWidget(new QLabel("Title: ", scrollAreaWidgetContents));
-    QLabel* tempLabel = new QLabel("Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy");
-    //QLabel* tempLabel = new QLabel(mPlot);
-    //tempLabel->setWordWrap(true);
-    tempLabel->setAlignment(Qt::AlignRight);
-    tempLabel->setAlignment(Qt::AlignTop);
-    tempLabel->setFixedWidth(300);
-    tempLabel->setFixedHeight(100);
-    //tempLabel->setMinimumWidth(200);
-    testHLayout->addWidget(tempLabel);*/
-
-   /* QHBoxLayout* nameHLayout = new QHBoxLayout(scrollAreaWidgetContents);
-    nameHLayout->addWidget(new QLabel("Title: ", scrollAreaWidgetContents));
-    nameHLayout->addWidget(new QLabel(mTitle, scrollAreaWidgetContents));
-
-    QHBoxLayout* actorHLayout = new QHBoxLayout(scrollAreaWidgetContents);
-    actorHLayout->addWidget(new QLabel("Actor: ", scrollAreaWidgetContents));
-    actorHLayout->addWidget(new QLabel(mActors, scrollAreaWidgetContents));
-
-    QHBoxLayout* directorHLayout = new QHBoxLayout(scrollAreaWidgetContents);
-    directorHLayout->addWidget(new QLabel("Director: ", scrollAreaWidgetContents));
-    directorHLayout->addWidget(new QLabel(mDirector, scrollAreaWidgetContents));
-
-    QHBoxLayout* writerHLayout = new QHBoxLayout(scrollAreaWidgetContents);
-    writerHLayout->addWidget(new QLabel("Writer: ", scrollAreaWidgetContents));
-    writerHLayout->addWidget(new QLabel(mWriter, scrollAreaWidgetContents));
-
-    QHBoxLayout* plotHLayout = new QHBoxLayout(scrollAreaWidgetContents);
-    plotHLayout->addWidget(new QLabel("Plot: ", scrollAreaWidgetContents));
-    plotHLayout->addWidget(new QLabel(mTitle, scrollAreaWidgetContents));
-
-
-    //adding the rating widget
-    QHBoxLayout* ratingHLayout = new QHBoxLayout(scrollAreaWidgetContents);
-    ratingHLayout->addWidget(new QLabel("Rating: ", scrollAreaWidgetContents));
-    ratingHLayout->addWidget(new KRatingWidget(scrollAreaWidgetContents));
-
-    //insideVLayout->addItem(testHLayout);
-    insideVLayout->addItem(nameHLayout);
-    insideVLayout->addItem(actorHLayout);
-    insideVLayout->addItem(directorHLayout);
-    insideVLayout->addItem(writerHLayout);
-    insideVLayout->addItem(plotHLayout);
-    insideVLayout->addItem(ratingHLayout);
-
-    //finally adding the metadata layout to the ListItem
-    tempHLayout->addItem(insideVLayout);*/
-
-
-    //------------- list item generator ends--------------------------------
-    //-------------- tempHLayout should be returned ------------------------
-
-    //+++++++++++++++++++++++   IDEAL ITEM    ++++++++++++++++++++++++++++++
 
 
     QWebView* poster = new QWebView(scrollAreaWidgetContents);
@@ -868,39 +719,7 @@ QHBoxLayout* MovieManager::createMovieManagerlistItem(QWidget* scrollAreaWidgetC
 
                         insideVLayout->addItem(ratingHLayout);
                         //------------end of rating------------------------------
-    /*
-    //-------------line1a-------------------------------------
-    QHBoxLayout* itemHLayout1a = new QHBoxLayout(helloWidget);
-    QLabel* idLabel1a = new QLabel("Id: ",helloWidget);
 
-    idLabel1a->setMinimumWidth(120);
-    idLabel1a->setAlignment(Qt::AlignTop);
-    idLabel1a->setAlignment(Qt::AlignLeft);
-
-    itemHLayout1a->addWidget(idLabel1a);
-    QLabel* idContent1a = new QLabel("The specification for the next stage is the output of the each design activity. This specification may be an abstract, formal specification that is produced to clarify the requirements or it may be a specification of how part of the system is to be realized.",helloWidget);
-
-    idContent1a->setMinimumWidth(150);
-    idContent1a->setMinimumHeight(300);
-    idContent1a->setWordWrap(true);
-    idContent1a->setAlignment(Qt::AlignJustify);
-    idContent1a->setAlignment(Qt::AlignTop);
-    idContent1a->setAlignment(Qt::AlignLeft);
-
-    itemHLayout1a->addWidget(idContent1a);
-    innerVLayout->addItem(itemHLayout1a);
-    //------------end of line 1a------------------------------
-    */
-
-    /*
-    //-------------line1-------------------------------------
-    QHBoxLayout* item2HLayout = new QHBoxLayout(helloWidget);
-    item2HLayout->addWidget(new QLabel("Title: ",helloWidget));
-    item2HLayout->addWidget(new QLabel("Avatar",helloWidget));
-    innerVLayout->addItem(item2HLayout);
-    //-------------end of line1------------------------------
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    */
     tempHLayout->addItem(insideVLayout);
     return tempHLayout;
 
