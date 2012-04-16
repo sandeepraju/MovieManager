@@ -106,6 +106,12 @@
 #include <QUrl>
 #include <QHash>
 
+
+//RAKESH QLISTWIDGET////
+#include <QListWidget>
+#include <QListWidgetItem>
+////////////////////////
+
 MovieManager::MovieManager()
     : KXmlGuiWindow(),
       //m_view(new MovieManagerView(this)),
@@ -126,8 +132,12 @@ MovieManager::MovieManager()
 
     //getNepomukData();
     //MovieManager UI is setup here
-    setupUserInterface();
+    //setupUserInterface();
     ///////////////////////////////
+
+    //RAKESH START/////////////
+    setupRakeshUI();
+    //RAKESH END///////////////
 
     //setupNewUserInterface();
     //setupNewModels();
@@ -148,6 +158,67 @@ MovieManager::MovieManager()
 
 MovieManager::~MovieManager()
 {
+}
+
+void MovieManager::openThat(QModelIndex i)
+{
+    qDebug() << "theri";
+    //qDebug() << witem->text();
+}
+
+void MovieManager::setupRakeshUI()
+{
+    mainWindow = new QWidget(this);
+    vMainLayout = new QVBoxLayout(mainWindow);
+    hTopLayout = new QHBoxLayout(mainWindow);
+
+    mainWindow->setLayout(vMainLayout);
+
+    searchLabel = new QLabel("Search:  ",mainWindow);
+    searchBar = new KLineEdit("",mainWindow);
+
+    connect(searchBar,SIGNAL(returnPressed(QString)),this,SLOT(slotSearchBarTextChanged(QString)));
+
+    vMainLayout->addItem(hTopLayout);
+    hTopLayout->addWidget(searchLabel);
+    hTopLayout->addWidget(searchBar);
+
+    listWidget = new QListWidget(mainWindow);
+    listWidget->setSortingEnabled(true);
+
+    Nepomuk::Query::Term term =  Nepomuk::Query::ResourceTypeTerm( Nepomuk::Vocabulary::NFO::Video());
+    Nepomuk::Query::Query m_currentQuery;
+    m_currentQuery.setTerm(term);
+    QList<Nepomuk::Query::Result> results = Nepomuk::Query::QueryServiceClient::syncQuery( m_currentQuery );
+    //globalResults = results;
+
+
+    Q_FOREACH( const Nepomuk::Query::Result& result,results) {
+        listWidget->addItem(new QListWidgetItem(result.resource().property(Nepomuk::Vocabulary::NFO::fileName()).toString()));
+    }
+
+    connect(listWidget,SIGNAL(doubleClicked(QModelIndex)),this, SLOT(openThat(QModelIndex)));
+
+//    listWidget->addItem(new QListWidgetItem("Oak"));
+//    listWidget->addItem(new QListWidgetItem("Banana"));
+//    listWidget->addItem(new QListWidgetItem("Apple"));
+//    listWidget->addItem(new QListWidgetItem("Orange"));
+//    listWidget->addItem(new QListWidgetItem("Grapes"));
+//    listWidget->addItem(new QListWidgetItem("Jayesh"));
+//    listWidget->addItem(new QListWidgetItem("Pineapple"));
+//    listWidget->addItem(new QListWidgetItem("GROUNDNUT"));
+//    listWidget->addItem(new QListWidgetItem("Sugarcane"));
+//    listWidget->addItem(new QListWidgetItem("Coconut"));
+//    listWidget->addItem(new QListWidgetItem("Remote"));
+//    listWidget->addItem(new QListWidgetItem("Mango"));
+
+    //connect(listWidget->indexWidget(QModelIndex()))
+
+     vMainLayout->addWidget(listWidget);
+
+     setCentralWidget(mainWindow);
+
+
 }
 
 void MovieManager::setupActions()
@@ -459,6 +530,28 @@ void MovieManager::slotSearchBarTextChanged(QString userInput)
 {
     //qDebug("user is typing this >> ");
     qDebug(userInput.toLatin1().data());    //this is generating some warning
+    //int count = listWidget->count();
+
+    //delete all the items in the results
+    while(listWidget->count() != 0)
+    {
+        qDebug() << listWidget->itemAt(0,0)->text();
+        delete listWidget->itemAt(0,0);
+    }
+
+    //qDebug() << "outside for:::::" << listWidget->item(2)->text();
+
+    Nepomuk::Query::Term term =  Nepomuk::Query::ResourceTypeTerm( Nepomuk::Vocabulary::NFO::Video());
+    Nepomuk::Query::Query m_currentQuery;
+    m_currentQuery.setTerm(term);
+    QList<Nepomuk::Query::Result> results = Nepomuk::Query::QueryServiceClient::syncQuery( m_currentQuery );
+    //globalResults = results;
+
+
+    Q_FOREACH( const Nepomuk::Query::Result& result,results) {
+        if(result.resource().property(Nepomuk::Vocabulary::NFO::fileName()).toString().contains(userInput))
+        listWidget->addItem(new QListWidgetItem(result.resource().property(Nepomuk::Vocabulary::NFO::fileName()).toString()));
+    }
 
 
 

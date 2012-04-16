@@ -92,6 +92,9 @@
 
 ///////////////
 
+#include <QListWidget>
+#include <QListWidgetItem>
+
 
 
 //#include "ui_prefs_base.h"
@@ -169,8 +172,11 @@ private:
 
     //NEW CODE GOES HERE
     // m_resourceView == resultPanel
-    QListView* resultPanel;
+    QListView* resultPanel;    
     Nepomuk::Utils::SimpleResourceModel* m_resourceViewModel;
+
+    QListWidget *listWidget;
+
 private:
     void setupNewUserInterface();
     void setupNewModels();
@@ -178,9 +184,13 @@ private:
     void addIconToResource(Nepomuk::Resource);
     void resourceSort(QList<Nepomuk::Resource> &resources);
 
+    void setupRakeshUI();
+
+
 private slots:
     void slotResultPanelSelectionChanged();
     void slotOpenResource(QModelIndex);
+    void openThat(QModelIndex);
     //NEW CODE ENDS HERE
 };
 
